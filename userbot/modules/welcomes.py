@@ -23,8 +23,7 @@ async def welcome_mute(welcm):
     if not WELCOME_MUTE:
         return
     if welcm.user_joined or welcm.user_added:
-    	adder = None
-    	
+        adder = None
         if welcm.user_added:
             async for admin in bot.iter_participants(
                 welcm.chat_id, filter=ChannelParticipantsAdmins

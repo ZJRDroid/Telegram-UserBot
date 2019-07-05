@@ -425,7 +425,7 @@ async def translateme(trans):
 
         source_lan = LANGUAGES[f'{reply_text.src.lower()}']
         transl_lan = LANGUAGES[f'{reply_text.dest.lower()}']
-        reply_text = f"**From {source_lan.title()}**\n**To {transl_lan.title()}:**\n\n{reply_text.text}"
+        reply_text = f"From **{source_lan.title()}**\nTo **{transl_lan.title()}:**\n\n{reply_text.text}"
 
         await trans.client.send_message(trans.chat_id, reply_text)
         await trans.delete()
