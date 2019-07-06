@@ -18,7 +18,7 @@ CURSOR = DB.cursor()
 CURSOR.execute("""SELECT * FROM BRAIN1""")
 ALL_ROWS = CURSOR.fetchall()
 INVALID_PH = '\nERROR: The Phone No. entered is INVALID' \
-             '\n Tip: Use Country Code along with No.' \
+             '\n Tip: Use Country Code along with number.' \
              '\n      Recheck your Phone Number'
 
 for i in ALL_ROWS:
@@ -33,8 +33,8 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
-LOGS.info("Your Bot is alive! Test it by typing .alive on any chat."
-          "Should you need assistance, head to https://t.me/userbot_support")
+LOGS.info("Your Bot is now running! Test it by typing .alive in any chat."
+          "If you need assistance, head to https://t.me/userbot_support")
 LOGS.info("Your Bot Version is 2.4.2")
 
 if len(argv) not in (1, 3, 4):
