@@ -104,10 +104,6 @@ async def mute_chat(mute_e):
                 BOTLOG_CHATID,
                 str(mute_e.chat_id) + " was silenced.")
 
-
-                BOTLOG_CHATID,
-                str(mute_e.chat_id) + " was silenced.")
-
 @register(incoming=True)
 async def keep_read(message):
     """ The mute logic. """
