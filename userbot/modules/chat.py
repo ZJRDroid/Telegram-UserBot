@@ -105,6 +105,9 @@ async def mute_chat(mute_e):
                 str(mute_e.chat_id) + " was silenced.")
 
 
+                BOTLOG_CHATID,
+                str(mute_e.chat_id) + " was silenced.")
+
 @register(incoming=True)
 async def keep_read(message):
     """ The mute logic. """
@@ -115,7 +118,7 @@ async def keep_read(message):
     kread = is_kread()
     if kread:
         for i in kread:
-            if i["chat_id"] == message.chat_id:
+            if i.groupid == str(message.chat_id):
                 await message.client.send_read_acknowledge(message.chat_id)
 
 CMD_HELP.update({
