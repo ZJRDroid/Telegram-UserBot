@@ -401,20 +401,20 @@ async def _(event):
         input_str = input_str.lower()
     if r % 2 == 1:
         if input_str == "heads":
-            await event.edit("The coin landed on: **Heads**. \n You were correct.")
+            await event.edit("The coin landed on: **Heads**.\nYou were correct.")
         elif input_str == "tails":
-            await event.edit("The coin landed on: **Heads**. \n You weren't correct, try again ...")
+            await event.edit("The coin landed on: **Heads**.\nYou weren't correct, try again ...")
         else:
             await event.edit("The coin landed on: **Heads**.")
     elif r % 2 == 0:
         if input_str == "tails":
-            await event.edit("The coin landed on: **Tails**. \n You were correct.")
+            await event.edit("The coin landed on: **Tails**.\nYou were correct.")
         elif input_str == "heads":
-            await event.edit("The coin landed on: **Tails**. \n You weren't correct, try again ...")
+            await event.edit("The coin landed on: **Tails**.\nYou weren't correct, try again ...")
         else:
             await event.edit("The coin landed on: **Tails**.")
     else:
-        await event.edit("¯\_(ツ)_/¯")
+        await event.edit("Gimme another coin, this one fake AF !!")
         
 @register(pattern="^.slap(?: |$)(.*)", outgoing=True)
 async def who(event):
@@ -461,7 +461,7 @@ async def get_user(event):
             replied_user = await event.client(GetFullUserRequest(user_object.id))
 
         except (TypeError, ValueError):
-            await event.edit("`I don't slap strangers !!`")
+            await event.edit("`I don't slap aliens, they ugly AF !!`")
             return None
 
     return replied_user
@@ -890,7 +890,7 @@ CMD_HELP.update({
 \nUsage: kensar clock animation.\
 \n\n.hi\
 \nUsage: Greet everyone!\
-\n\n.coinflip <choice> (optional)\
+\n\n.coinflip <heads/tails>\
 \nUsage: Flip a coin !!\
 \n\n.owo\
 \nUsage: UwU\
@@ -922,5 +922,5 @@ CMD_HELP.update({
 \nUsage: Let me Google that for you real quick !!\
 \n\n.decide\
 \nUsage: Make a quick decision.\
-\n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for these."
+\n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."
 })
