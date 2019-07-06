@@ -447,7 +447,8 @@ async def get_user(event):
             user = int(user)
 
         if not user:
-            await event.edit("`Give me someone to slap !!`")
+            self_user = await event.client.get_me()
+            user = self_user.id
 
         if event.message.entities is not None:
             probable_user_mention_entity = event.message.entities[0]
