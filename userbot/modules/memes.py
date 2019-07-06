@@ -505,7 +505,7 @@ async def _(event):
     r = requests.get("https://yesno.wtf/api").json()
     await event.client.send_message(
         event.chat_id,
-        r["answer"],
+        str(r["answer"]).upper(),
         reply_to=message_id,
         file=r["image"]
     )
