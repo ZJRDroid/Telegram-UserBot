@@ -390,8 +390,33 @@ async def kek(keks):
     for i in range(1, 15):
         time.sleep(0.3)
         await keks.edit(":" + uio[i % 2])
-
-@register(pattern=".slap(?: |$)(.*)", outgoing=True)
+        
+@register(outgoing=True, pattern=r"^.coinflip (.*)")
+async def _(event):
+    if event.fwd_from:
+        return
+    r = random.randint(1, 100)
+    input_str = event.pattern_match.group(1)
+    if input_str:
+        input_str = input_str.lower()
+    if r % 2 == 1:
+        if input_str == "heads":
+            await event.edit("The coin landed on: **Heads**. \n You were correct.")
+        elif input_str == "tails":
+            await event.edit("The coin landed on: **Heads**. \n You weren't correct, try again ...")
+        else:
+            await event.edit("The coin landed on: **Heads**.")
+    elif r % 2 == 0:
+        if input_str == "tails":
+            await event.edit("The coin landed on: **Tails**. \n You were correct.")
+        elif input_str == "heads":
+            await event.edit("The coin landed on: **Tails**. \n You weren't correct, try again ...")
+        else:
+            await event.edit("The coin landed on: **Tails**.")
+    else:
+        await event.edit("¯\_(ツ)_/¯")
+        
+@register(pattern="^.slap(?: |$)(.*)", outgoing=True)
 async def who(event):
     """ slaps a user, or get slapped if not a reply. """
     if event.fwd_from:
@@ -468,7 +493,23 @@ async def lol(lel):
     for _ in range(10):
         okay = okay[:-1] + "_-"
         await lel.edit(okay)
-
+        
+@register(outgoing=True, pattern="^.decide$")
+async def _(event):
+    if event.fwd_from:
+        return
+    message_id = event.message.id
+    if event.reply_to_msg_id:
+        message_id = event.reply_to_msg_id
+    r = requests.get("https://yesno.wtf/api").json()
+    await event.client.send_message(
+        event.chat_id,
+        r["answer"],
+        reply_to=message_id,
+        file=r["image"]
+    )
+    await event.delete()
+    
 @register(outgoing=True, pattern="^;_;$")
 async def fun(e):
     t = ";__;"
@@ -849,6 +890,8 @@ CMD_HELP.update({
 \nUsage: kensar clock animation.\
 \n\n.hi\
 \nUsage: Greet everyone!\
+\n\n.coinflip <choice> (optional)\
+\nUsage: Flip a coin !!\
 \n\n.owo\
 \nUsage: UwU\
 \n\n.react\
@@ -877,5 +920,7 @@ CMD_HELP.update({
 \nUsage: Just a small command to make your keyboard become a typewriter!\
 \n\n.lfy <query>\
 \nUsage: Let me Google that for you real quick !!\
+\n\n.decide\
+\nUsage: Make a quick decision.\
 \n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for these."
 })
