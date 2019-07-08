@@ -101,7 +101,7 @@ async def kang(args):
                     await conv.get_response()
                     # Ensure user doesn't get spamming notifications
                     await bot.send_read_acknowledge(conv.chat_id)
-                    await conv.send_message(f"@{user.username}'s userbot pack {pack}")
+                    await conv.send_message(f"@{user.username}'s Kang Pack Vol. {pack}")
                     await conv.get_response()
                     # Ensure user doesn't get spamming notifications
                     await bot.send_read_acknowledge(conv.chat_id)
@@ -128,7 +128,16 @@ async def kang(args):
                     await bot.send_read_acknowledge(conv.chat_id)
 
             await args.edit(
-                f"Sticker added! Your pack can be found [here](t.me/addstickers/{packname})",
+                f"""╲┏━┳━━━━━━━━┓╲╲
+                ╲┃◯┃╭┻┻╮╭┻┻╮┃╲╲
+                ╲┃╮┃┃╭╮┃┃╭╮┃┃╲╲
+                ╲┃╯┃┗┻┻┛┗┻┻┻┻╮╲
+                ╲┃◯┃╭╮╰╯┏━━━┳╯╲
+                ╲┃╭┃╰┏┳┳┳┳┓◯┃╲╲
+                ╲┃╰┃◯╰┗┛┗┛╯╭┃╲╲
+                
+                Sticked kanged successfully !!
+                My pack can be found [here](t.me/addstickers/{packname})""",
                 parse_mode='md'
             )
 
@@ -184,7 +193,7 @@ async def get_pack_info(event):
     await event.edit(OUTPUT)
 
 CMD_HELP.update({
-    "kang": ".kang\
+    "stickers": ".kang\
 \nUsage: Reply .kang to a sticker or an image to kang it to your userbot pack.\
 \n\n.kang [emoji('s)]\
 \nUsage: Works just like .kang but uses the emoji('s) you picked.\
