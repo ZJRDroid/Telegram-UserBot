@@ -129,15 +129,15 @@ async def kang(args):
 
             await args.edit(
                 f"""╲┏━┳━━━━━━━━┓╲╲
-                ╲┃◯┃╭┻┻╮╭┻┻╮┃╲╲
-                ╲┃╮┃┃╭╮┃┃╭╮┃┃╲╲
-                ╲┃╯┃┗┻┻┛┗┻┻┻┻╮╲
-                ╲┃◯┃╭╮╰╯┏━━━┳╯╲
-                ╲┃╭┃╰┏┳┳┳┳┓◯┃╲╲
-                ╲┃╰┃◯╰┗┛┗┛╯╭┃╲╲
-                
-                Sticked kanged successfully !!
-                My pack can be found [here](t.me/addstickers/{packname})""",
+╲┃◯┃╭┻┻╮╭┻┻╮┃╲╲
+╲┃╮┃┃╭╮┃┃╭╮┃┃╲╲
+╲┃╯┃┗┻┻┛┗┻┻┻┻╮╲
+╲┃◯┃╭╮╰╯┏━━━┳╯╲
+╲┃╭┃╰┏┳┳┳┳┓◯┃╲╲
+╲┃╰┃◯╰┗┛┗┛╯╭┃╲╲
+
+Sticked kanged successfully !!
+My pack can be found [here](t.me/addstickers/{packname})""",
                 parse_mode='md'
             )
 
