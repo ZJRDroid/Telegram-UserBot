@@ -128,16 +128,8 @@ async def kang(args):
                     await bot.send_read_acknowledge(conv.chat_id)
 
             await args.edit(
-                f"""╲┏━┳━━━━━━━━┓╲╲
-╲┃◯┃╭┻┻╮╭┻┻╮┃╲╲
-╲┃╮┃┃╭╮┃┃╭╮┃┃╲╲
-╲┃╯┃┗┻┻┛┗┻┻┻┻╮╲
-╲┃◯┃╭╮╰╯┏━━━┳╯╲
-╲┃╭┃╰┏┳┳┳┳┓◯┃╲╲
-╲┃╰┃◯╰┗┛┗┛╯╭┃╲╲
-
-Sticked kanged successfully !!
-My pack can be found [here](t.me/addstickers/{packname})""",
+                f"""Sticker added!
+Your pack can be found [here](t.me/addstickers/{packname})""",
                 parse_mode='md'
             )
 
@@ -166,7 +158,7 @@ async def resize_photo(photo):
 
     return image
 
-@register(outgoing=True, pattern="^.stkinfo$")
+@register(outgoing=True, pattern="^.stkrinfo$")
 async def get_pack_info(event):
     if not event.is_reply:
         await bot.update_message(event, PACKINFO_HELP)
@@ -201,6 +193,6 @@ CMD_HELP.update({
 \nUsage: Kang's the sticker/image to the specified pack but uses 🤔 as emoji.\
 \n\n.kang [emoji('s)] [number]\
 \nUsage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
-\n\n.stkinfo\
+\n\n.stkrinfo\
 \nUsage: Gets info about the sticker pack."
 })
