@@ -582,7 +582,7 @@ async def vapor(vpr):
             else:
                 reply_text.append(charac)
 
-         await vpr.edit("".join(reply_text))
+        await vpr.edit("".join(reply_text))
 
 
 @register(outgoing=True, pattern="^.str(?: |$)(.*)")
