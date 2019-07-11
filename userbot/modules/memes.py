@@ -790,7 +790,7 @@ async def spongemocktext(mock):
             else:
                 reply_text.append(charac)
 
-         await mock.edit("".join(reply_text))
+        await mock.edit("".join(reply_text))
 
 
 @register(outgoing=True, pattern="^.clap(?: |$)(.*)")
