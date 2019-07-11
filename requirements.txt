@@ -32,7 +32,7 @@ speedtest-cli>=2.0.2
 spotify_token
 sqlalchemy>=1.2
 telegraph
-telethon>=1.6.2
+telethon>=1.9
 telethon-session-sqlalchemy>=0.2.6
 urbandict>=0.5
 wikipedia>=1.4.0
