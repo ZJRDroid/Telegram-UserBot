@@ -29,7 +29,6 @@ pytube>=9.5.1
 pytz
 requests>=2.18.4
 speedtest-cli>=2.0.2
-spongemock
 spotify_token
 sqlalchemy>=1.2
 telegraph
@@ -37,4 +36,3 @@ telethon>=1.6.2
 telethon-session-sqlalchemy>=0.2.6
 urbandict>=0.5
 wikipedia>=1.4.0
-zalgo_text>=0.6

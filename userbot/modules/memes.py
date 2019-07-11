@@ -19,12 +19,9 @@ import requests
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 
-from spongemock import spongemock
-from zalgo_text import zalgo
-
 from cowpy import cow
 
-from userbot import (WIDE_MAP, CMD_HELP)
+from userbot import CMD_HELP, ZALG_LIST
 from userbot.events import register
 
 # ================= CONSTANT =================
@@ -566,6 +563,7 @@ async def copypasta(cp_e):
 async def vapor(vpr):
     """ Vaporize everything! """
     if not vpr.text[0].isalpha() and vpr.text[0] not in ("/", "#", "@", "!"):
+    	reply_text = list()
         textx = await vpr.get_reply_message()
         message = vpr.pattern_match.group(1)
         if message:
@@ -575,9 +573,16 @@ async def vapor(vpr):
         else:
             await vpr.edit("`Ｇｉｖｅ ｓｏｍｅ ｔｅｘｔ ｆｏｒ ｖａｐｏｒ！`")
             return
+            
+        for charac in message:
+            if 0x21 <= ord(charac) <= 0x7F:
+                reply_text.append(chr(ord(charac) + 0xFEE0))
+            elif ord(charac) == 0x20:
+                reply_text.append(chr(0x3000))
+            else:
+                reply_text.append(charac)
 
-        reply_text = str(message).translate(WIDE_MAP)
-        await vpr.edit(reply_text)
+         await vpr.edit("".join(reply_text))
 
 
 @register(outgoing=True, pattern="^.str(?: |$)(.*)")
@@ -608,6 +613,7 @@ async def stretch(stret):
 async def zal(zgfy):
     """ Invoke the feeling of chaos. """
     if not zgfy.text[0].isalpha() and zgfy.text[0] not in ("/", "#", "@", "!"):
+    	reply_text = list()
         textx = await zgfy.get_reply_message()
         message = zgfy.pattern_match.group(1)
         if message:
@@ -619,10 +625,25 @@ async def zal(zgfy):
                 "`gͫ ̆ i̛ ̺ v͇̆ ȅͅ   a̢ͦ   s̴̪ c̸̢ ä̸ rͩͣ y͖͞   t̨͚ é̠ x̢͖  t͔͛`"
             )
             return
+            
+        for charac in message:
+            if not charac.isalpha():
+                reply_text.append(charac)
+                continue
 
-        input_text = " ".join(message).lower()
-        zalgofied_text = zalgo.zalgo().zalgofy(input_text)
-        await zgfy.edit(zalgofied_text)
+             for _ in range(0, 3):
+                randint = random.randint(0, 2)
+
+                 if randint == 0:
+                    charac = charac.strip() + random.choice(ZALG_LIST[0]).strip()
+                elif randint == 1:
+                    charac = charac.strip() + random.choice(ZALG_LIST[1]).strip()
+                else:
+                    charac = charac.strip() + random.choice(ZALG_LIST[2]).strip()
+
+             reply_text.append(charac)
+
+         await zgfy.edit("".join(reply_text))
 
 
 @register(outgoing=True, pattern="^.hi$")
@@ -748,6 +769,7 @@ async def _(event):
 async def spongemocktext(mock):
     """ Do it and find the real fun. """
     if not mock.text[0].isalpha() and mock.text[0] not in ("/", "#", "@", "!"):
+    	reply_text = list()
         textx = await mock.get_reply_message()
         message = mock.pattern_match.group(1)
         if message:
@@ -757,9 +779,15 @@ async def spongemocktext(mock):
         else:
             await mock.edit("`gIvE sOMEtHInG tO MoCk!`")
             return
+            
+        for charac in message:
+            if charac.isalpha() and random.randint(0, 1):
+                to_app = charac.upper() if charac.islower() else charac.lower()
+                reply_text.append(to_app)
+            else:
+                reply_text.append(charac)
 
-        reply_text = spongemock.mock(message)
-        await mock.edit(reply_text)
+         await mock.edit("".join(reply_text))
 
 
 @register(outgoing=True, pattern="^.clap(?: |$)(.*)")
