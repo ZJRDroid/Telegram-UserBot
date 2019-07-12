@@ -19,7 +19,7 @@ from telethon.tl.types import InputPhoto, MessageMediaPhoto, User, Chat, Channel
 
 from userbot import CMD_HELP
 from userbot.events import register
-import datetime
+from datetime import datetime
 
 # ====================== CONSTANT ===============================
 INVALID_MEDIA = "```The extension of the media entity is invalid.```"
@@ -113,14 +113,14 @@ async def _(event):
     c = 0
     bc = 0
     b = 0
-    dialogs = await event.client.get_dialogs(
+    dialogs = await bot.get_dialogs(
         limit=None,
         ignore_migrated=True
     )
     for d in dialogs:
         currrent_entity = d.entity
         if type(currrent_entity) is User:
-            if currrent_entity.event.client:
+            if currrent_entity.bot:
                 b += 1
             else:
                 u += 1
