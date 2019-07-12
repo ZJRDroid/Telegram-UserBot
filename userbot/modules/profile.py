@@ -54,7 +54,7 @@ async def update_name(name):
         await name.edit(NAME_OK)
 
 
-@register(outgoing=True, pattern="^.setpropic$")
+@register(outgoing=True, pattern="^.setpfp$")
 async def set_profilepic(propic):
     """ For .profilepic command, change your profile picture in Telegram. """
     if not propic.text[0].isalpha() and propic.text[0] not in ("/", "#", "@", "!"):
@@ -176,8 +176,8 @@ CMD_HELP.update({
 \nUsage: Changes your Telegram username.\
 \n\n.name <firstname> or .name <firstname> <lastname>\
 \nUsage: Changes your Telegram name.(First and last name will get split by the first space)\
-\n\n.profilepic\
-\nUsage: Reply with .profilepic to an image to change your Telegram profie picture.\
+\n\n.setpfp\
+\nUsage: Reply with .setpfp to an image to change your Telegram profie picture.\
 \n\n.setbio <new_bio>\
 \nUsage: Changes your Telegram bio.\
 \n\n.delpfp or .delpfp <number>/<all>\
