@@ -27,22 +27,22 @@ class Filters(BASE):
 Filters.__table__.create(checkfirst=True)
 
 
-async def get_filter(chatid, keyword):
+def get_filter(chatid, keyword):
     try:
         return SESSION.query(Filters).get((str(chat_id), keyword))
     finally:
         SESSION.close()
     
     
-async def get_filters(chat_id):
+def get_filters(chat_id):
     try:
         return SESSION.query(Filters).filter(Filters.chat_id == str(chat_id)).all()
     finally:
         SESSION.close()
 
         
-async def add_filter(chat_id, keyword, reply):
-    to_check = await get_filter(chatid, keyword)
+def add_filter(chat_id, keyword, reply):
+    to_check = get_filter(chatid, keyword)
     if not to_check:
         adder = Filters(str(chat_id), keyword, reply)
         SESSION.add(adder)
@@ -52,8 +52,8 @@ async def add_filter(chat_id, keyword, reply):
         return False
 
 
-async def remove_filter(chat_id, keyword):
-    to_check = await get_filter(chatid, keyword)
+def remove_filter(chat_id, keyword):
+    to_check = get_filter(chatid, keyword)
     
     if not to_check:
         return False
