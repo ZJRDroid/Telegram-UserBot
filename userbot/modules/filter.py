@@ -129,11 +129,11 @@ async def filters_active(event):
         for filt in filters:
             if transact == "`There are no filters in this chat.`":
                 transact = "Active filters in this chat:\n"
-                transact += "👁️ **{}**\nReply: `{}`\n".format(filt.keyword,
-                                                               filt.reply)
+                transact += "👁️ `{}`\nReply:\n{}\n".format(filt.keyword,
+                                                           filt.reply)
             else:
-                transact += "👁️ **{}**\nReply: `{}`\n".format(filt.keyword,
-                                                               filt.reply)
+                transact += "👁️ `{}`\nReply:\n{}\n".format(filt.keyword,
+                                                           filt.reply)
 
         await event.edit(transact)
         
