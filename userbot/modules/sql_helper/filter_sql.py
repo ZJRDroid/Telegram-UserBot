@@ -49,6 +49,12 @@ def add_filter(chat_id, keyword, reply):
         SESSION.commit()
         return True
     else:
+        rem = SESSION.query(Filters).get((str(chat_id), keyword))
+        SESSION.delete(rem)
+        SESSION.commit()
+        adder = Filters(str(chat_id), keyword, reply)
+        SESSION.add(adder)
+        SESSION.commit()
         return False
 
 
