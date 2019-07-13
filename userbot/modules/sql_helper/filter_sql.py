@@ -27,7 +27,7 @@ class Filters(BASE):
 Filters.__table__.create(checkfirst=True)
 
 
-def get_filter(chatid, keyword):
+def get_filter(chat_id, keyword):
     try:
         return SESSION.query(Filters).get((str(chat_id), keyword))
     finally:
@@ -42,7 +42,7 @@ def get_filters(chat_id):
 
         
 def add_filter(chat_id, keyword, reply):
-    to_check = get_filter(chatid, keyword)
+    to_check = get_filter(chat_id, keyword)
     if not to_check:
         adder = Filters(str(chat_id), keyword, reply)
         SESSION.add(adder)
@@ -53,7 +53,7 @@ def add_filter(chat_id, keyword, reply):
 
 
 def remove_filter(chat_id, keyword):
-    to_check = get_filter(chatid, keyword)
+    to_check = get_filter(chat_id, keyword)
     
     if not to_check:
         return False
