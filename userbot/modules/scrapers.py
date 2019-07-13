@@ -429,7 +429,6 @@ async def translateme(trans):
         reply_text = f"From **{source_lan.title()}**\nTo **{transl_lan.title()}:**\n\n{reply_text.text}"
 
         await trans.edit(reply_text)
-        await trans.delete()
         if BOTLOG:
             await trans.client.send_message(
                 BOTLOG_CHATID,
