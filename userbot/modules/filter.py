@@ -56,7 +56,7 @@ async def add_new_filter(new_handler):
             
         msg = "`Filter` **{}** `{} successfully`"
         
-        if add_filter(str(new_handler.chat_id), kek[1], string[1:]) is True:
+        if await add_filter(str(new_handler.chat_id), kek[1], string[1:]) is True:
             await new_handler.edit(msg.format(kek[1], 'added'))
         else:
             await new_handler.edit(msg.format(kek[1], 'updated'))
@@ -74,7 +74,7 @@ async def remove_a_filter(r_handler):
         
         filt = r_handler.text[6:]
         
-        if not remove_filter(r_handler.chat_id, filt):
+        if not await remove_filter(r_handler.chat_id, filt):
             await r_handler.edit("`Filter` **{}** `doesn't exist.`"
                              .format(filt))
         else:
@@ -129,11 +129,11 @@ async def filters_active(event):
         for filt in filters:
             if transact == "`There are no filters in this chat.`":
                 transact = "Active filters in this chat:\n"
-                transact += "👁️ **{}** - `{}`\n".format(filt.keyword,
-                                                         filt.reply)
+                transact += "👁️ **{}**\nReply: `{}`\n".format(filt.keyword,
+                                                               filt.reply)
             else:
-                transact += "👁️ **{}** - `{}`\n".format(filt.keyword,
-                                                filt.reply)
+                transact += "👁️ **{}**\nReply: `{}`\n".format(filt.keyword,
+                                                               filt.reply)
 
         await event.edit(transact)
         
