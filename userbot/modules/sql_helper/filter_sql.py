@@ -27,23 +27,39 @@ class Filters(BASE):
 Filters.__table__.create(checkfirst=True)
 
 
+def get_filter(chatid, keyword):
+    try:
+        return SESSION.query(Filters).get((str(chat_id), keyword))
+    finally:
+        SESSION.close()
+    
+    
 def get_filters(chat_id):
     try:
         return SESSION.query(Filters).filter(Filters.chat_id == str(chat_id)).all()
     finally:
         SESSION.close()
 
-
+        
 def add_filter(chat_id, keyword, reply):
-    adder = Filters(str(chat_id), keyword, reply)
-    SESSION.add(adder)
-    SESSION.commit()
-    return True
+    to_check = await get_filter(chatid, keyword)
+    if not to_check:
+        adder = Filters(str(chat_id), keyword, reply)
+        SESSION.add(adder)
+        SESSION.commit()
+        return True
+    else:
+        return False
 
 
 def remove_filter(chat_id, keyword):
-    rem = SESSION.query(Filters).get((str(chat_id), keyword))
-    if rem:
+    to_check = await get_filter(chatid, keyword)
+    
+    if not to_check:
+        return False
+    else:
+        # rem = SESSION.query(Filters).get((str(chat_id), keyword))
+        rem = Filters(str(chat_id), keyword, reply)
         SESSION.delete(rem)
         SESSION.commit()
         return True
