@@ -38,6 +38,7 @@ def add_filter(chat_id, keyword, reply):
     adder = Filters(str(chat_id), keyword, reply)
     SESSION.add(adder)
     SESSION.commit()
+    return True
 
 
 def remove_filter(chat_id, keyword):
@@ -45,3 +46,4 @@ def remove_filter(chat_id, keyword):
     if rem:
         SESSION.delete(rem)
         SESSION.commit()
+        return True
