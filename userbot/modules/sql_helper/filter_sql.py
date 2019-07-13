@@ -11,12 +11,12 @@ class Filters(BASE):
     keyword = Column(UnicodeText, primary_key=True, nullable=False)
     reply = Column(UnicodeText, nullable=False)
 
-    async def __init__(self, chat_id, keyword, reply):
+    def __init__(self, chat_id, keyword, reply):
         self.chat_id = str(chat_id)  # ensure string
         self.keyword = keyword
         self.reply = reply
 
-    async def __eq__(self, other):
+    def __eq__(self, other):
         return bool(
             isinstance(other, Filters)
             and self.chat_id == other.chat_id
