@@ -11,12 +11,12 @@ class Filters(BASE):
     keyword = Column(UnicodeText, primary_key=True, nullable=False)
     reply = Column(UnicodeText, nullable=False)
 
-    def __init__(self, chat_id, keyword, reply):
+    async def __init__(self, chat_id, keyword, reply):
         self.chat_id = str(chat_id)  # ensure string
         self.keyword = keyword
         self.reply = reply
 
-    def __eq__(self, other):
+    async def __eq__(self, other):
         return bool(
             isinstance(other, Filters)
             and self.chat_id == other.chat_id
@@ -27,21 +27,21 @@ class Filters(BASE):
 Filters.__table__.create(checkfirst=True)
 
 
-def get_filter(chatid, keyword):
+async def get_filter(chatid, keyword):
     try:
         return SESSION.query(Filters).get((str(chat_id), keyword))
     finally:
         SESSION.close()
     
     
-def get_filters(chat_id):
+async def get_filters(chat_id):
     try:
         return SESSION.query(Filters).filter(Filters.chat_id == str(chat_id)).all()
     finally:
         SESSION.close()
 
         
-def add_filter(chat_id, keyword, reply):
+async def add_filter(chat_id, keyword, reply):
     to_check = await get_filter(chatid, keyword)
     if not to_check:
         adder = Filters(str(chat_id), keyword, reply)
@@ -52,7 +52,7 @@ def add_filter(chat_id, keyword, reply):
         return False
 
 
-def remove_filter(chat_id, keyword):
+async def remove_filter(chat_id, keyword):
     to_check = await get_filter(chatid, keyword)
     
     if not to_check:
