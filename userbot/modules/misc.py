@@ -70,7 +70,8 @@ async def revivedabot(restart):
 async def bot_support(wannahelp):
     """ For .support command, just returns the group link. """
     if not wannahelp.text[0].isalpha() and wannahelp.text[0] not in ("/", "#", "@", "!"):
-        await wannahelp.edit("Join the userbot community: @userbot_support")
+        await wannahelp.edit("""Join the awesome Paperplane userbot community: @userbot_support
+        Be warned that this is a fork of their project and you may get limited support for bugs.""")
 
 @register(outgoing=True, pattern="^.creator$")
 async def creator(e):
@@ -80,7 +81,7 @@ async def creator(e):
 @register(outgoing=True, pattern="^.readme$")
 async def reedme(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await e.edit("[README.md](https://github.com/AvinashReddy3108/Telegram-UserBot/blob/master/README.md)")
+        await e.edit("You might want to have a look at the [README.md](https://github.com/AvinashReddy3108/Paperplane-Extended/blob/master/README.md) file.")
 
 #
 # Copyright (c) Gegham Zakaryan | 2019
@@ -102,7 +103,7 @@ async def repeat(rep):
 async def repo_is_here(wannasee):
     """ For .repo command, just returns the repo URL. """
     if not wannasee.text[0].isalpha() and wannasee.text[0] not in ("/", "#", "@", "!"):
-        await wannasee.edit("[SOURCE CODE](https://github.com/AvinashReddy3108/Telegram-UserBot)")
+        await wannasee.edit("Click [here](https://github.com/AvinashReddy3108/Paperplane-Extended) to open Paperplane Extended's GitHub page.")
 
 CMD_HELP.update({
     'random': '.random <item1> <item2> ... <itemN>\
