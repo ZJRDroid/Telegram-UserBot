@@ -36,7 +36,7 @@ TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./")
 #        current, total, (current / total) * 100
 #    )
 
-async def progress(current, total, event, start, type_of_ps):
+async def progress(current, total, event, start, type_of_ps, file_name):
     """Generic progress_callback for both
     upload.py and download.py"""
     now = time.time()
@@ -47,7 +47,7 @@ async def progress(current, total, event, start, type_of_ps):
         elapsed_time = round(diff) * 1000
         time_to_completion = round((total - current) / speed) * 1000
         estimated_total_time = elapsed_time + time_to_completion
-        progress_str = "[{0}{1}]\nPercent: {2}%\n".format(
+        progress_str = "[{0}{1}]\nProgress: {2}%\n".format(
             ''.join(["█" for i in range(math.floor(percentage / 5))]),
             ''.join(["░" for i in range(20 - math.floor(percentage / 5))]),
             round(percentage, 2))
@@ -57,8 +57,9 @@ async def progress(current, total, event, start, type_of_ps):
                 humanbytes(total),
                 time_formatter(estimated_total_time)
             )
-        await event.edit("{}\n {}".format(
+        await event.edit("{}\n`{}`\n{}".format(
             type_of_ps,
+            file_name,
             tmp
         ))
 
@@ -90,11 +91,11 @@ def time_formatter(milliseconds: int) -> str:
     minutes, seconds = divmod(seconds, 60)
     hours, minutes = divmod(minutes, 60)
     days, hours = divmod(hours, 24)
-    tmp = ((str(days) + "d, ") if days else "") + \
-        ((str(hours) + "h, ") if hours else "") + \
-        ((str(minutes) + "m, ") if minutes else "") + \
-        ((str(seconds) + "s, ") if seconds else "") + \
-        ((str(milliseconds) + "ms, ") if milliseconds else "")
+    tmp = ((str(days) + "day(s), ") if days else "") + \
+        ((str(hours) + "hour(s), ") if hours else "") + \
+        ((str(minutes) + "minute(s), ") if minutes else "") + \
+        ((str(seconds) + "second(s), ") if seconds else "") + \
+        ((str(milliseconds) + "millisecond(s), ") if milliseconds else "")
     return tmp[:-2]
 
 
@@ -116,7 +117,7 @@ async def download(target_file):
                     await target_file.get_reply_message(),
                     TEMP_DOWNLOAD_DIRECTORY,
                     progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                        progress(d, t, mone, c_time, "trying to download")
+                        progress(d, t, mone, c_time, "Downloading...", downloaded_file_name)
                     )
                 )
             except Exception as e: # pylint:disable=C0103,W0703
@@ -247,7 +248,7 @@ async def uploadir(udir_event):
                             allow_cache=False,
                             reply_to=udir_event.message.id,
                             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                                progress(d, t, udir_event, c_time, "trying to upload")
+                                progress(d, t, udir_event, c_time, "Uploading...", single_file)
                             )
                         )
                     else:
@@ -281,7 +282,7 @@ async def uploadir(udir_event):
                                 )
                             ],
                             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                                progress(d, t, udir_event, c_time, "trying to upload")
+                                progress(d, t, udir_event, c_time, "Uploading...", single_file)
                             )
                         )
                     os.remove(single_file)
@@ -317,7 +318,7 @@ async def upload(u_event):
                 allow_cache=False,
                 reply_to=u_event.message.id,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, mone, c_time, "trying to upload")
+                    progress(d, t, mone, c_time, "Uploading...", input_str)
                 )
             )
             end = datetime.now()
@@ -441,7 +442,7 @@ async def uploadas(uas_event):
                             )
                         ],
                         progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                            progress(d, t, uas_event, c_time, "trying to upload")
+                            progress(d, t, uas_event, c_time, "Uploading...", file_name)
                         )
                     )
                 elif round_message:
@@ -463,7 +464,7 @@ async def uploadas(uas_event):
                             )
                         ],
                         progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                            progress(d, t, uas_event, c_time, "trying to upload")
+                            progress(d, t, uas_event, c_time, "Uploading...", file_name)
                         )
                     )
                 elif spam_big_messages:
