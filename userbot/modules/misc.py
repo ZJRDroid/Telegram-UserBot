@@ -59,12 +59,14 @@ async def revivedabot(restart):
     """ For .restart command, restart the bot down."""
     if not restart.text[0].isalpha():
         await restart.edit("`BRB... *PornHub intro*`")
-        bye = os.getpid()
-        bash = f"#!/bin/bash/\nkill -9 {bye}\npython3 -m userbot"
-        f = open("restart.sh", "w+")
-        f.write(bash)
-        f.close()
-        os.popen("bash restart.sh")
+        #bye = os.getpid()
+        #bash = f"#!/bin/bash/\nkill -9 {bye}\npython3 -m userbot"
+        #f = open("restart.sh", "w+")
+        #f.write(bash)
+        #f.close()
+        #os.popen("bash restart.sh")
+        os.execl(sys.executable, sys.executable, *sys.argv)
+        quit()
 
 @register(outgoing=True, pattern="^.support$")
 async def bot_support(wannahelp):
