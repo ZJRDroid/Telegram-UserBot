@@ -28,14 +28,6 @@ from userbot.events import register
 
 TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./")
 
-
-#def progress(current, total, event, io_string):
-#    """ Logs the download progress """
-#    LOGS.info(
-#        "Downloaded %s of %s\nCompleted %s",
-#        current, total, (current / total) * 100
-#    )
-
 async def progress(current, total, event, start, type_of_ps, file_name = None):
     """Generic progress_callback for both
     upload.py and download.py"""
