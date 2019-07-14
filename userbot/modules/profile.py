@@ -17,7 +17,7 @@ from telethon.tl.functions.photos import (DeletePhotosRequest,
                                           UploadProfilePhotoRequest)
 from telethon.tl.types import InputPhoto, MessageMediaPhoto, User, Chat, Channel
 
-from userbot import CMD_HELP
+from userbot import bot, CMD_HELP
 from userbot.events import register
 from datetime import datetime
 
