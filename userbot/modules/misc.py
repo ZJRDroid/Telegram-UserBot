@@ -10,6 +10,7 @@
 from random import randint
 from time import sleep
 import os
+import sys
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from userbot.events import register
 
@@ -72,8 +73,8 @@ async def revivedabot(restart):
 async def bot_support(wannahelp):
     """ For .support command, just returns the group link. """
     if not wannahelp.text[0].isalpha() and wannahelp.text[0] not in ("/", "#", "@", "!"):
-        await wannahelp.edit("""Join the awesome Paperplane userbot community: @userbot_support
-        Be warned that this is a fork of their project and you may get limited support for bugs.""")
+        await wannahelp.edit("Join the awesome Paperplane userbot community: @userbot_support\n\
+        Be warned that this is a fork of their project and you may get limited support for bugs.")
 
 @register(outgoing=True, pattern="^.creator$")
 async def creator(e):
