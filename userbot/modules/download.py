@@ -245,7 +245,9 @@ async def uploadir(udir_event):
                             force_document=False,
                             allow_cache=False,
                             reply_to=udir_event.message.id,
-                            progress_callback=progress,
+                            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                                progress(d, t, udir_event, c_time, "trying to upload")
+                            )
                         )
                     else:
                         thumb_image = os.path.join(input_str, "thumb.jpg")
@@ -276,7 +278,9 @@ async def uploadir(udir_event):
                                     supports_streaming=True,
                                 )
                             ],
-                            progress_callback=progress,
+                            progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                                progress(d, t, udir_event, c_time, "trying to upload")
+                            )
                         )
                     os.remove(single_file)
                     uploaded = uploaded + 1
@@ -296,7 +300,7 @@ async def upload(u_event):
         if u_event.is_channel and not u_event.is_group:
             await u_event.edit("`Uploading isn't permitted on channels`")
             return
-        await u_event.edit("Processing ...")
+        mone = await u_event.edit("Processing ...")
         input_str = u_event.pattern_match.group(1)
         if input_str in ("userbot.session", "config.env"):
             await u_event.edit("`That's a dangerous operation! Not Permitted!`")
@@ -309,7 +313,9 @@ async def upload(u_event):
                 force_document=True,
                 allow_cache=False,
                 reply_to=u_event.message.id,
-                progress_callback=progress,
+                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                    progress(d, t, mone, c_time, "trying to upload")
+                )
             )
             end = datetime.now()
             duration = (end - start).seconds
@@ -430,7 +436,9 @@ async def uploadas(uas_event):
                                 supports_streaming=True,
                             )
                         ],
-                        progress_callback=progress,
+                        progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                            progress(d, t, uas_event, c_time, "trying to upload")
+                        )
                     )
                 elif round_message:
                     await uas_event.client.send_file(
@@ -449,7 +457,9 @@ async def uploadas(uas_event):
                                 supports_streaming=True,
                             )
                         ],
-                        progress_callback=progress,
+                        progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                            progress(d, t, uas_event, c_time, "trying to upload")
+                        )
                     )
                 elif spam_big_messages:
                     await uas_event.edit("TBD: Not (yet) Implemented")
