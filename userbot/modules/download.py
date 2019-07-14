@@ -36,7 +36,7 @@ TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./")
 #        current, total, (current / total) * 100
 #    )
 
-async def progress(current, total, event, start, type_of_ps, file_name):
+async def progress(current, total, event, start, type_of_ps, file_name = None):
     """Generic progress_callback for both
     upload.py and download.py"""
     now = time.time()
@@ -57,11 +57,17 @@ async def progress(current, total, event, start, type_of_ps, file_name):
                 humanbytes(total),
                 time_formatter(estimated_total_time)
             )
-        await event.edit("{}\n`{}`\n{}".format(
-            type_of_ps,
-            file_name,
-            tmp
-        ))
+        if file_name:
+            await event.edit("{}\n`{}`\n{}".format(
+                type_of_ps,
+                file_name,
+                tmp
+            ))
+        else:
+            await event.edit("{}\n{}".format(
+                type_of_ps,
+                tmp
+            ))
 
 def humanbytes(size):
     """Input size in bytes,
@@ -117,7 +123,7 @@ async def download(target_file):
                     await target_file.get_reply_message(),
                     TEMP_DOWNLOAD_DIRECTORY,
                     progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                        progress(d, t, mone, c_time, "Downloading...", downloaded_file_name)
+                        progress(d, t, mone, c_time, "Downloading...")
                     )
                 )
             except Exception as e: # pylint:disable=C0103,W0703
