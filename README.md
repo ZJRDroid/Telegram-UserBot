@@ -1,7 +1,7 @@
 <h1>Project Paperplane Extended</h1>
 <h3><strong>A modular Telegram userbot running on Python 3.6+ with an sqlalchemy database.</strong></h3>
 <h4>The easiest way to deploy this bad boy !!</h4>
-<p><a href="https://heroku.com/deploy"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy"/></a><code></code></p>
+<p><a href="https://heroku.com/deploy"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy"/></a></p>
 <pre><code>#include &lt;std/disclaimer.h&gt;
 /**
     Your Telegram account may get banned.
