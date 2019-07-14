@@ -237,6 +237,7 @@ async def uploadir(udir_event):
                 if os.path.exists(single_file):
                     # https://stackoverflow.com/a/678242/4723940
                     caption_rts = os.path.basename(single_file)
+                    c_time = time.time()
                     if not caption_rts.lower().endswith(".mp4"):
                         await udir_event.client.send_file(
                             udir_event.chat_id,
@@ -251,6 +252,7 @@ async def uploadir(udir_event):
                         )
                     else:
                         thumb_image = os.path.join(input_str, "thumb.jpg")
+                        c_time = time.time()
                         metadata = extractMetadata(createParser(single_file))
                         duration = 0
                         width = 0
@@ -307,6 +309,7 @@ async def upload(u_event):
             return
         if os.path.exists(input_str):
             start = datetime.now()
+            c_time = time.time()
             await u_event.client.send_file(
                 u_event.chat_id,
                 input_str,
@@ -419,6 +422,7 @@ async def uploadas(uas_event):
                 height = metadata.get("height")
             try:
                 if supports_streaming:
+                    c_time = time.time()
                     await uas_event.client.send_file(
                         uas_event.chat_id,
                         file_name,
@@ -441,6 +445,7 @@ async def uploadas(uas_event):
                         )
                     )
                 elif round_message:
+                    c_time = time.time()
                     await uas_event.client.send_file(
                         uas_event.chat_id,
                         file_name,
