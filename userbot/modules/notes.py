@@ -19,6 +19,8 @@ async def notes_active(svd):
         except AttributeError:
             await svd.edit("`Running on Non-SQL mode!`")
             return
+        
+        message = "`There are no saved notes in this chat`"
         notes = get_notes(svd.chat_id)
         for note in notes:
             if message == "`There are no saved notes in this chat`":
