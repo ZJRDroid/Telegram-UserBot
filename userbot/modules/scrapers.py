@@ -428,12 +428,11 @@ async def translateme(trans):
         transl_lan = LANGUAGES[f'{reply_text.dest.lower()}']
         reply_text = f"From **{source_lan.title()}**\nTo **{transl_lan.title()}:**\n\n{reply_text.text}"
 
-        await trans.client.send_message(trans.chat_id, reply_text)
-        await trans.delete()
+        await trans.edit(reply_text)
         if BOTLOG:
             await trans.client.send_message(
                 BOTLOG_CHATID,
-                f"Translate query `{message}` was executed successfully",
+                f"Translate query was executed successfully",
             )
 
 

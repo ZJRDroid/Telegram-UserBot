@@ -11,6 +11,7 @@
 import os
 from asyncio import sleep
 from datetime import datetime
+
 from requests import post, get
 
 from userbot import CMD_HELP
@@ -53,7 +54,8 @@ async def parseqr(qr_e):
 @register(pattern=r".makeqr(?: |$)([\s\S]*)", outgoing=True)
 async def make_qr(qrcode):
     """ For .makeqr command, make a QR Code containing the given content. """
-    if not qrcode.text[0].isalpha() and qrcode.text[0] not in ("/", "#", "@", "!"):
+    if not qrcode.text[0].isalpha() and qrcode.text[0] not in (
+            "/", "#", "@", "!"):
         if qrcode.fwd_from:
             return
         start = datetime.now()
@@ -63,11 +65,11 @@ async def make_qr(qrcode):
         if input_str:
             message = input_str
         elif qrcode.reply_to_msg_id:
-            previous_message, progress_callback=progress
+            previous_message = await qrcode.get_reply_message()
             reply_msg_id = previous_message.id
             if previous_message.media:
                 downloaded_file_name = await qrcode.client.download_media(
-                    previous_message, DL_DIRECTORY, progress_callback=progress
+                    previous_message, progress_callback=progress
                 )
                 m_list = None
                 with open(downloaded_file_name, "rb") as file:
@@ -78,8 +80,7 @@ async def make_qr(qrcode):
                 os.remove(downloaded_file_name)
             else:
                 message = previous_message.message
-        else:
-            message = "SYNTAX: `.makeqr <long text to include>`"
+
         url = "https://api.qrserver.com/v1/create-qr-code/?data={}&size=200x200&\
                 charset-source=UTF-8&charset-target=UTF-8&ecc=L&color=0-0-0\
                 &bgcolor=255-255-255&margin=1&qzone=0&format=jpg"
@@ -99,6 +100,7 @@ async def make_qr(qrcode):
         await qrcode.edit("Created QRCode in {} seconds".format(duration))
         await sleep(5)
         await qrcode.delete()
+
 
 CMD_HELP.update({
     'getqr': ".getqr\

@@ -1,10 +1,8 @@
-# Telegram-UserBot
-
-### # The easiest way to deploy this bad boy !!
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-```
-#include <std/disclaimer.h>
+<h1>Project Paperplane Extended</h1>
+<h3><strong>A modular Telegram userbot running on Python 3.6+ with an sqlalchemy database.</strong></h3>
+<h4>The easiest way to deploy this bad boy !!</h4>
+<p><a href="https://heroku.com/deploy"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy"/></a></p>
+<pre><code>#include &lt;std/disclaimer.h&gt;
 /**
     Your Telegram account may get banned.
     I am not responsible for any improper use of this bot
@@ -17,39 +15,27 @@
     for getting your acoount deleted?
     I will rolling on the floor laughing at you.
 /**
-```
-
-A modular telegram Python UserBot running on python3 with an sqlalchemy database.
-
-Started up as a simple bot, which helps with deleting messages and other stuffs when I didn't possess a smartphone(selecting each message indeed difficult) with a ton of meme features kanged from [SkittBot](https://github.com/skittles9823/SkittBot), it has evolved, becoming extremely modular and simple to use.
-
-For configuring this userbot, you can checkout the [Wiki](https://wiki.raphielgang.org)
-
-If you just want to stay in the loop about new features or
-announcements you can join the [news channel](https://t.me/maestro_userbot_channel).
-
-If you find any bugs or have any suggestions then don't hesitate to contact me in [my support group](https://t.me/userbot_support).
-
-Please head to the wiki on instructions to setting it up!
-
-### Credits:
-
-I would like to thank people who assisted me throughout this project:
-
-* [@YouTwitFace](https://github.com/YouTwitFace)
-* [@TheDevXen](https://github.com/TheDevXen)
-* [@Skittles9823](https://github.com/Skittles9823)
-* [@deletescape](https://github.com/deletescape)
-* [@songotenks69](https://github.com/songotenks69)
-* [@Ovenoboyo](https://github.com/Ovenoboyo)
-* [SphericalKat](https://github.com/ATechnoHazard)
-* [@nitanmarcell's TelegramCompanion](https://www.github.com/nitanmarcel/telegramcompanion)
-* [@spechide's UniBorg](https://www.github.com/spechide/uniborg)
-* [@Jeepeo's JBot](https://github.com/Jeepeo/JBot)
-
-and many more people and projects who aren't mentioned here.
-
-All features taken from them are copyrighted to their respespective, if you are handling the features/module 
-by them you need to strictly comply their respective LICENSE 
-
-Found Bugs? Create an issue on the issue tracker, or post it in the [support group](https://t.me/userbot_support).
+</code></pre>
+<p>This is a kang/fork/copy of the famous <a href="https://github.com/RaphielGang/Telegram-UserBot">Paperplane</a> userbot made by the awesome <a href="https://github.com/RaphielGang">RaphielGang</a> team with some extras from the Telegram userbot community.</p>
+<p>For setting up and configuring this userbot, you can checkout the <a href="https://github.com/AvinashReddy3108/Telegram-UserBot/wiki">Wiki</a> [WIP]</p>
+<p>If you just want to stay in the loop about new features or<br /> announcements you can join the <a href="https://t.me/AvinashUserBot">news channel</a>.</p>
+<p>If you find any bugs or have any suggestions then don&rsquo;t hesitate to contact me in my <a href="https://t.me/joinchat/FL1HhlObW_Q5oUrZdbDcKg">support group</a>.</p>
+<p>Please head to the wiki on instructions to setting it up!</p>
+<h3>Credits:</h3>
+<p>I would like to thank people who assisted me throughout this project:</p>
+<ul>
+<li><a href="https://github.com/YouTwitFace">@YouTwitFace</a></li>
+<li><a href="https://github.com/TheDevXen">@TheDevXen</a></li>
+<li><a href="https://github.com/Skittles9823">@Skittles9823</a></li>
+<li><a href="https://github.com/deletescape">@deletescape</a></li>
+<li><a href="https://github.com/songotenks69">@songotenks69</a></li>
+<li><a href="https://github.com/Ovenoboyo">@Ovenoboyo</a></li>
+<li><a href="https://github.com/ATechnoHazard">SphericalKat</a></li>
+<li><a href="https://www.github.com/nitanmarcel">@nitanmarcell</a></li>
+<li><a href="https://www.github.com/spechide">@spechide</a></li>
+<li><a href="https://github.com/Jeepeo">@Jeepeo</a></li>
+<li><a href="https://github.com/shxnpie">@shxnpie</a></li>
+</ul>
+<p>and many more people and projects who aren&rsquo;t mentioned here.</p>
+<p>All features taken from them are copyrighted to their respespective, if you are handling the features/module<br /> by them you need to strictly comply their respective LICENSE</p>
+<p>Found Bugs? Create an issue on the issue tracker, or post it in the <a href="https://t.me/joinchat/FL1HhlObW_Q5oUrZdbDcKg">support group</a>.</p>

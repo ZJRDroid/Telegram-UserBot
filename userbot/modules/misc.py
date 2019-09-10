@@ -10,6 +10,7 @@
 from random import randint
 from time import sleep
 import os
+import sys
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP
 from userbot.events import register
 
@@ -59,18 +60,21 @@ async def revivedabot(restart):
     """ For .restart command, restart the bot down."""
     if not restart.text[0].isalpha():
         await restart.edit("`BRB... *PornHub intro*`")
-        bye = os.getpid()
-        bash = f"#!/bin/bash/\nkill -9 {bye}\npython3 -m userbot"
-        f = open("restart.sh", "w+")
-        f.write(bash)
-        f.close()
-        os.popen("bash restart.sh")
+        #bye = os.getpid()
+        #bash = f"#!/bin/bash/\nkill -9 {bye}\npython3 -m userbot"
+        #f = open("restart.sh", "w+")
+        #f.write(bash)
+        #f.close()
+        #os.popen("bash restart.sh")
+        os.execl(sys.executable, sys.executable, *sys.argv)
+        quit()
 
 @register(outgoing=True, pattern="^.support$")
 async def bot_support(wannahelp):
     """ For .support command, just returns the group link. """
     if not wannahelp.text[0].isalpha() and wannahelp.text[0] not in ("/", "#", "@", "!"):
-        await wannahelp.edit("Join the userbot community: @userbot_support")
+        await wannahelp.edit("Join the awesome Paperplane userbot community: @userbot_support\n\
+        Be warned that this is a fork of their project and you may get limited support for bugs.")
 
 @register(outgoing=True, pattern="^.creator$")
 async def creator(e):
@@ -80,7 +84,7 @@ async def creator(e):
 @register(outgoing=True, pattern="^.readme$")
 async def reedme(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await e.edit("[README.md](https://github.com/AvinashReddy3108/Telegram-UserBot/blob/master/README.md)")
+        await e.edit("You might want to have a look at the [README.md](https://github.com/AvinashReddy3108/Paperplane-Extended/blob/master/README.md) file.")
 
 #
 # Copyright (c) Gegham Zakaryan | 2019
@@ -102,7 +106,7 @@ async def repeat(rep):
 async def repo_is_here(wannasee):
     """ For .repo command, just returns the repo URL. """
     if not wannasee.text[0].isalpha() and wannasee.text[0] not in ("/", "#", "@", "!"):
-        await wannasee.edit("[SOURCE CODE](https://github.com/AvinashReddy3108/Telegram-UserBot)")
+        await wannasee.edit("Click [here](https://github.com/AvinashReddy3108/Paperplane-Extended) to open Paperplane Extended's GitHub page.")
 
 CMD_HELP.update({
     'random': '.random <item1> <item2> ... <itemN>\

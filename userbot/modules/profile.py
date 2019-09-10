@@ -17,9 +17,9 @@ from telethon.tl.functions.photos import (DeletePhotosRequest,
                                           UploadProfilePhotoRequest)
 from telethon.tl.types import InputPhoto, MessageMediaPhoto, User, Chat, Channel
 
-from userbot import CMD_HELP
+from userbot import bot, CMD_HELP
 from userbot.events import register
-import datetime
+from datetime import datetime
 
 # ====================== CONSTANT ===============================
 INVALID_MEDIA = "```The extension of the media entity is invalid.```"
@@ -54,7 +54,7 @@ async def update_name(name):
         await name.edit(NAME_OK)
 
 
-@register(outgoing=True, pattern="^.setpropic$")
+@register(outgoing=True, pattern="^.setpfp$")
 async def set_profilepic(propic):
     """ For .profilepic command, change your profile picture in Telegram. """
     if not propic.text[0].isalpha() and propic.text[0] not in ("/", "#", "@", "!"):
@@ -113,14 +113,14 @@ async def _(event):
     c = 0
     bc = 0
     b = 0
-    dialogs = await event.client.get_dialogs(
+    dialogs = await bot.get_dialogs(
         limit=None,
         ignore_migrated=True
     )
     for d in dialogs:
         currrent_entity = d.entity
         if type(currrent_entity) is User:
-            if currrent_entity.event.client:
+            if currrent_entity.bot:
                 b += 1
             else:
                 u += 1
@@ -176,8 +176,8 @@ CMD_HELP.update({
 \nUsage: Changes your Telegram username.\
 \n\n.name <firstname> or .name <firstname> <lastname>\
 \nUsage: Changes your Telegram name.(First and last name will get split by the first space)\
-\n\n.profilepic\
-\nUsage: Reply with .profilepic to an image to change your Telegram profie picture.\
+\n\n.setpfp\
+\nUsage: Reply with .setpfp to an image to change your Telegram profie picture.\
 \n\n.setbio <new_bio>\
 \nUsage: Changes your Telegram bio.\
 \n\n.delpfp or .delpfp <number>/<all>\

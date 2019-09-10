@@ -24,6 +24,8 @@ async def filter_incoming_handler(handler):
                 return
             listes = handler.text.split(" ")
             filters = get_filters(handler.chat_id)
+            if not filters:
+                    return
             for trigger in filters:
                 for item in listes:
                     pro = fullmatch(trigger.keyword, item, flags=IGNORECASE)
@@ -48,8 +50,16 @@ async def add_new_filter(new_handler):
         string = ""
         for i in range(2, len(kek)):
             string = string + " " + str(kek[i])
-        add_filter(str(new_handler.chat_id), kek[1], string)
-        await new_handler.edit("```Filter added successfully```")
+            
+        if new_handler.reply_to_msg_id:
+            string = " " + (await new_handler.get_reply_message()).text
+            
+        msg = "`Filter` **{}** `{} successfully`"
+        
+        if add_filter(str(new_handler.chat_id), kek[1], string[1:]) is True:
+            await new_handler.edit(msg.format(kek[1], 'added'))
+        else:
+            await new_handler.edit(msg.format(kek[1], 'updated'))
 
 
 @register(outgoing=True, pattern="^.stop\\s.*")
@@ -61,31 +71,45 @@ async def remove_a_filter(r_handler):
         except AttributeError:
             await r_handler.edit("`Running on Non-SQL mode!`")
             return
-        message = r_handler.text
-        kek = message.split(" ")
-        remove_filter(r_handler.chat_id, kek[1])
-        await r_handler.edit("```Filter removed successfully```")
+        
+        filt = r_handler.text[6:]
+        
+        if not remove_filter(r_handler.chat_id, filt):
+            await r_handler.edit("`Filter` **{}** `doesn't exist.`"
+                             .format(filt))
+        else:
+            await r_handler.edit("`Filter` **{}** `was deleted successfully`"
+                             .format(filt))
 
 
-@register(outgoing=True, pattern="^.rmfilters$")
-async def kick_marie_filter(kick):
+@register(outgoing=True, pattern="^.rmfilters (.*)")
+async def kick_marie_filter(event):
     """ For .rmfilters command, allows you to kick all \
         Marie(or her clones) filters from a chat. """
-    if not kick.text[0].isalpha() and kick.text[0] not in ("/", "#", "@", "!"):
-        await kick.edit("```Will be kicking away all Marie filters.```")
-        sleep(3)
-        resp = await kick.get_reply_message()
+    cmd = event.text[0]
+    if not cmd.isalpha() and cmd not in ("/", "#", "@", "!"):
+        bot_type = event.pattern_match.group(1)
+        if bot_type not in ["marie", "rose"]:
+            await event.edit("`That bot is not yet supported!`")
+            return
+        await event.edit("```Will be kicking away all Filters!```")
+        await sleep(3)
+        resp = await event.get_reply_message()
         filters = resp.text.split("-")[1:]
         for i in filters:
-            await kick.reply("/stop %s" % (i.strip()))
+            if bot_type == "marie":
+                await event.reply("/stop %s" % (i.strip()))
+            if bot_type == "rose":
+                i = i.replace('`', '')
+                await event.reply("/stop %s" % (i.strip()))
             await sleep(0.3)
-        await kick.respond(
-            "```Successfully purged Marie filters yaay!```\n Gimme cookies!"
+        await event.respond(
+            "```Successfully purged bots filters yaay!```\n Gimme cookies!"
         )
         if BOTLOG:
-            await kick.client.send_message(
-                BOTLOG_CHATID, "I cleaned all Marie filters at " +
-                str(kick.chat_id)
+            await event.client.send_message(
+                BOTLOG_CHATID, "I cleaned all filters at " +
+                               str(event.chat_id)
             )
 
 
@@ -99,12 +123,22 @@ async def filters_active(event):
             await event.edit("`Running on Non-SQL mode!`")
             return
         transact = "`There are no filters in this chat.`"
+        
+        
         filters = get_filters(event.chat_id)
-        for i in filters:
-            message = "Active filters in this chat: \n\n"
-            transact = message + "👁️ `" + i.keyword + "`\n"
-        await event.edit(transact)
+        for filt in filters:
+            if transact == "`There are no filters in this chat.`":
+                transact = "Active filters in this chat:\n"
+                transact += "👁️ `{}`\nReply:\n{}\n".format(filt.keyword,
+                                                           filt.reply)
+            else:
+                transact += "👁️ `{}`\nReply:\n{}\n".format(filt.keyword,
+                                                           filt.reply)
 
+        await event.edit(transact)
+        
+        
+        
 CMD_HELP.update({
     "filter": "\
 .filters\
@@ -116,5 +150,4 @@ If you reply to a sticker with a keyword, the bot will reply with that sticker.\
 \nNOTE: all filter keywords are in lowercase.\
 \n\n.stop <filter>\
 \nUsage: Stops that filter.\
-"
-})
+"})
